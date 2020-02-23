@@ -7,7 +7,7 @@ import jenkins.model.Jenkins
 // arrays containing information for Jobs to build (see README.md)
 def buildJobs = [
         // api-platform components view
-        [name: 'api-generator', view: 'blog', repo: 'ivan1405/api-generator', jenkinsfile: 'Jenkinsfile', branch: 'master', release: true],
+        [name: 'api-generator', view: 'blog', repo: 'ivan1405/api-generator', jenkinsfile: 'Jenkinsfile', branch: 'master'],
 ]
 
 // jobs/views from the base image
