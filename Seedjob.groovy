@@ -117,7 +117,7 @@ buildJobs.findAll { it.release == true }.each { releaseJob ->
         wrappers {
             credentialsBinding {
                 // needed to be able to push during maven release
-                usernamePassword('GIT_USERNAME', 'GIT_PASSWORD', gitCredentialsSecret)
+                usernamePassword('GIT_USERNAME', 'GIT_PASSWORD', secretName)
             }
         }
         preBuildSteps {
