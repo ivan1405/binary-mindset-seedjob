@@ -6,7 +6,6 @@ import jenkins.model.Jenkins
 
 // arrays containing information for Jobs to build (see README.md)
 def buildJobs = [
-        // api-platform components view
         [name: 'api-generator', view: 'blog', repo: 'ivan1405/api-generator', jenkinsfile: 'Jenkinsfile', branch: 'master'],
 ]
 
@@ -17,7 +16,7 @@ def predefinedView = 'Operation-View'
 // predefined view we want to keep (recreate, respectively)
 def operationsView = 'operations'
 // jobs we definitely want to delete
-def jobsToWipeOut = ["svnExample"]
+def jobsToWipeOut = ["svnExample", "api-generator-release"]
 
 // constants:
 // name of the secret containing a valid token to use for git operations
