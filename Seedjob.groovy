@@ -2,7 +2,19 @@
 /////////// Jenkins Master Seed Job. It builds all Jenkins Jobs for Jenkins //////////
 //////////////////////////////////////////////////////////////////////////////////////
 
-import jenkins.model.Jenkins
+
+import java.lang.reflect.*;
+import jenkins.model.Jenkins;
+import jenkins.model.*;
+import org.jenkinsci.plugins.scriptsecurity.scripts.*;
+import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.*;
+
+scriptApproval = ScriptApproval.get()
+alreadyApproved = new HashSet<>(Arrays.asList(scriptApproval.getApprovedSignatures()))
+
+approveSignature('method groovy.json.JsonBuilder call java.util.List')
+
+
 
 // arrays containing information for Jobs to build (see README.md)
 def buildJobs = [
@@ -161,14 +173,10 @@ listView("releases") {
     }
 }
 
-// delete predefined view if it still exists
-viewToDelete = Jenkins.instance.getView(predefinedView)
-if (viewToDelete != null) {
-    Jenkins.instance.deleteView(viewToDelete)
-}
 
 // save current Jenkins state to disk
 Jenkins.instance.save()
+
 
 // functions
 
