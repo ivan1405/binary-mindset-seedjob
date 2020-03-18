@@ -1,20 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////////
 /////////// Jenkins Master Seed Job. It builds all Jenkins Jobs for Jenkins //////////
 //////////////////////////////////////////////////////////////////////////////////////
-
-
-import java.lang.reflect.*;
 import jenkins.model.Jenkins;
-import jenkins.model.*;
-import org.jenkinsci.plugins.scriptsecurity.scripts.*;
-import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.*;
-
-scriptApproval = ScriptApproval.get()
-alreadyApproved = new HashSet<>(Arrays.asList(scriptApproval.getApprovedSignatures()))
-
-approveSignature('method groovy.json.JsonBuilder call java.util.List')
-
-
 
 // arrays containing information for Jobs to build (see README.md)
 def buildJobs = [
