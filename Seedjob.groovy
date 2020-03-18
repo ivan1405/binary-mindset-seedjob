@@ -9,18 +9,12 @@ def buildJobs = [
         [name: 'api-generator', view: 'blog', repo: 'ivan1405/api-generator', jenkinsfile: 'Jenkinsfile', branch: 'master'],
 ]
 
-// jobs/views from the base image
-def predefinedJobs = ['MasterSeedJob']
-// predefined Jobs we want to keep
-def predefinedView = 'Operation-View'
-// predefined view we want to keep (recreate, respectively)
-def operationsView = 'operations'
-// jobs we definitely want to delete
-def jobsToWipeOut = ["svnExample", "api-generator-release"]
+// jobs we want to delete
+def jobsToWipeOut = []
 
 // constants:
 // name of the secret containing a valid token to use for git operations
-def secretName = "github-secret"
+def secretName = "github-token"
 // the github host
 def githubHost = "https://github.com"
 
@@ -131,22 +125,20 @@ buildJobs.findAll { it.release == true }.each { releaseJob ->
 // create views:
 // 1. create views defined in Job array
 buildJobs.groupBy { it.view }.each { view, jobsPerView ->
-    if (view != operationsView) {
-        listView(view) {
-            jobs {
-                jobsPerView.each { job ->
-                    name("${job.name}")
-                }
+    listView(view) {
+        jobs {
+            jobsPerView.each { job ->
+                name("${job.name}")
             }
-            columns {
-                status()
-                weather()
-                name()
-                lastSuccess()
-                lastFailure()
-                lastDuration()
-                buildButton()
-            }
+        }
+        columns {
+            status()
+            weather()
+            name()
+            lastSuccess()
+            lastFailure()
+            lastDuration()
+            buildButton()
         }
     }
 }
@@ -169,26 +161,6 @@ listView("releases") {
     }
 }
 
-// 3. create operations view with predefined from Jenkins base image, add the additional seed jobs there and rename it
-listView(operationsView) {
-    jobs {
-        predefinedJobs.each { jobName ->
-            name("${jobName}")
-        }
-        buildJobs.findAll { it.view == operationsView }.each { buildJob ->
-            name("${buildJob.name}")
-        }
-    }
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-    }
-}
 // delete predefined view if it still exists
 viewToDelete = Jenkins.instance.getView(predefinedView)
 if (viewToDelete != null) {
