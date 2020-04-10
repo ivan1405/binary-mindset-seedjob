@@ -5,7 +5,8 @@ import jenkins.model.Jenkins;
 
 // arrays containing information for Jobs to build (see README.md)
 def buildJobs = [
-        [name: 'karate-demo', view: 'blog', repo: 'ivan1405/binary-mindset-karate-demo', jenkinsfile: 'Jenkinsfile', branch: 'master'],
+        [name: 'karate-demo-it', view: 'blog', repo: 'ivan1405/binary-mindset-karate-demo', jenkinsfile: 'Jenkinsfile-it', branch: 'master'],
+        [name: 'karate-demo-loadtests', view: 'blog', repo: 'ivan1405/binary-mindset-karate-demo', jenkinsfile: 'Jenkinsfile-loadtests', branch: 'master'],
 ]
 
 // jobs we want to delete
